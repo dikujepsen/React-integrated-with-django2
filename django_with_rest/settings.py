@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_api.apps.RestApiConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -100,6 +101,13 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_api.permissions.IsAdminUser',
+    # ],
+    'PAGE_SIZE': 10
+}
 
 
 # Internationalization
