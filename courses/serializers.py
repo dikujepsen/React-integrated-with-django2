@@ -3,6 +3,7 @@ from .models import Course, Author
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    author_name = serializers.CharField(source='author')
 
     class Meta:
         model = Course
