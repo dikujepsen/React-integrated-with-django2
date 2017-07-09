@@ -6,5 +6,5 @@ import {Route, IndexRoute} from 'react-router';
 import App from './components/App';
 
 export default (
-  <Route path="/react/" component={App} />
+  <Route path="/" component={App} />
 );
