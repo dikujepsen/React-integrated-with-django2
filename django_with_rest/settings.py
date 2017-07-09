@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_api.apps.RestApiConfig',
     'snippets.apps.SnippetsConfig',
     'react.apps.ReactConfig',
+    # 'courses.apps.CoursesConfig',
     'rest_framework',
     'webpack_loader'
 ]
