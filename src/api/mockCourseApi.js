@@ -57,11 +57,10 @@ const generateId = (course) => {
 
 class CourseApi {
   static getAllCourses() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(Object.assign([], courses));
-      }, delay);
-    });
+    return fetch('/api/courses/')
+    .then(response => response.json()
+      .then(data => data.results))
+
   }
 
   static saveCourse(course) {
