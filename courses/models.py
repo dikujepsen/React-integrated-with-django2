@@ -10,3 +10,12 @@ class Course(models.Model):
 
     class Meta:
         ordering = ('title',)
+
+
+class Author(models.Model):
+    firstName = models.CharField(max_length=100)
+    lastName = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('firstName',)

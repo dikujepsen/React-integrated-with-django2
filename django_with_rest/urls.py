@@ -27,6 +27,7 @@ router = DefaultRouter()
 router.register(r'snippets', snippets_views.SnippetViewSet)
 router.register(r'users', snippets_views.UserViewSet)
 router.register(r'courses', courses_views.CourseViewSet)
+router.register(r'authors', courses_views.AuthorViewSet)
 
 
 # Wire up our API using automatic URL routing.
