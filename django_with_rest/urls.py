@@ -18,16 +18,23 @@ from django.contrib import admin
 
 from django.conf.urls import url, include
 from rest_framework.schemas import get_schema_view
-
+from snippets import views as snippets_views
+from courses import views as courses_views
+from rest_framework.routers import DefaultRouter
 
 schema_view = get_schema_view(title='Pastebin API')
+router = DefaultRouter()
+router.register(r'snippets', snippets_views.SnippetViewSet)
+router.register(r'users', snippets_views.UserViewSet)
+router.register(r'courses', courses_views.CourseViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^schema/$', schema_view),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include('snippets.urls')),
+    url(r'^api/', include(router.urls)),
     url(r'^', include('react.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
