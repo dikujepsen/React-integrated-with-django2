@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import LoginForm from './LoginForm';
+import LoginApi from '../../api/loginApi';
 
 class LoginSection extends React.Component {
     constructor(props, context) {
@@ -26,6 +27,10 @@ class LoginSection extends React.Component {
 
   loginUser(event) {
     event.preventDefault();
+    let token = $("[name='csrfmiddlewaretoken']").val();
+    let stateLogin = this.state.login;
+    stateLogin.csrfmiddlewaretoken = token;
+    LoginApi.LoginUser(stateLogin);
     this.setState({saving: true});
   }
 
