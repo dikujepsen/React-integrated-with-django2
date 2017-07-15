@@ -19,6 +19,13 @@ class ManageAuthorPage extends React.Component {
     this.updateAuthorState = this.updateAuthorState.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.author.id !== nextProps.author.id) {
+      this.setState({author: Object.assign({}, nextProps.author)});
+    }
+  }
+
+
   updateAuthorState(event) {
     const field = event.target.name;
     let author = this.state.author;
@@ -26,9 +33,27 @@ class ManageAuthorPage extends React.Component {
     return this.setState({author: author});
   }
 
+  setValidationError(message) {
+    toastr.error(message);
+    this.setState({saving: false});
+  }
+
   saveAuthor(event) {
     event.preventDefault();
     this.setState({saving: true});
+    let author = this.state.author;
+    const minAuthorNameLength = 3;
+    if (author.firstName.length < minAuthorNameLength) {
+      this.setValidationError(`First Name must be at least ${minAuthorNameLength} characters.`);
+      return;
+    }
+
+    if (author.lastName.length < minAuthorNameLength) {
+      this.setValidationError(`Last Name must be at least ${minAuthorNameLength} characters.`);
+      return;
+    }
+
+
     this.props.actions.saveAuthor(this.state.author)
       .then(() => this.redirect())
       .catch(error => {
@@ -75,7 +100,7 @@ function getAuthorById(authors, id) {
 
 function mapStateToProps(state, ownProps) {
 
-  const authorId = ownProps.params.id;
+  const authorId = parseInt(ownProps.params.id);
 
   let author = {id: '', firstName: '', lastName: ''};
 
