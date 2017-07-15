@@ -34,13 +34,19 @@ export function loadAuthors() {
 export function saveAuthor(author) {
   return function(dispatch, getState) {
     dispatch(beginAjaxCall());
-    return AuthorApi.saveAuthor(author).then(savedAuthor => {
-      author.id ? dispatch(updateAuthorSuccess(savedAuthor)) :
-        dispatch(createAuthorSuccess(savedAuthor));
-    }).catch(error => {
+    let promise = undefined;
+    if (author.id) {
+      promise = AuthorApi.saveAuthor(author).then(savedAuthor => {
+        dispatch(updateAuthorSuccess(savedAuthor))});
+    } else {
+      promise = AuthorApi.insertAuthor(author).then(savedAuthor => {
+        dispatch(createAuthorSuccess(savedAuthor))});
+    }
+    return promise.catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);
     });
+
   };
 }
 

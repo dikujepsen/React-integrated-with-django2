@@ -34,6 +34,30 @@ function handleErrors(response) {
   return response;
 }
 
+function getRequest(author, url, method) {
+  let csrftoken = $('#container').data('csrftoken');
+  let request = new Request(url, {
+    method: method,
+    headers: {'Content-Type': 'application/json',
+      'X-CSRFTOKEN': csrftoken},
+    body: JSON.stringify(author),
+    credentials: 'same-origin'
+  });
+  return request;
+}
+
+
+function getPutRequest(author) {
+  let request = getRequest(author, 'http://localhost:8000/api/authors/' + author.id + '/', "PUT");
+  return request;
+}
+
+function getPostRequest(author) {
+  let request = getRequest(author, 'http://localhost:8000/api/authors/', "POST");
+  return request;
+}
+
+
 class AuthorApi {
   static getAllAuthors() {
     return fetch('/api/authors/')
@@ -41,15 +65,15 @@ class AuthorApi {
         .then(data => data.results));
   }
 
+
   static saveAuthor(author) {
-    let csrftoken = $('#container').data('csrftoken');
-    return fetch('http://localhost:8000/api/authors/' + author.id + '/',
-      {
-        method: "PUT",
-        headers: {'Content-Type': 'application/json',
-                  'X-CSRFTOKEN': csrftoken},
-        body: JSON.stringify(author),
-        credentials: 'same-origin'})
+    return fetch(getPutRequest(author))
+      .then(handleErrors)
+      .then(() => author);
+  }
+
+  static insertAuthor(author) {
+    return fetch(getPostRequest(author))
       .then(handleErrors)
       .then(() => author);
   }
