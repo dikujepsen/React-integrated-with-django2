@@ -85,7 +85,7 @@ function getCourseById(courses, id) {
 function mapStateToProps(state, ownProps) {
   const courseId = parseInt(ownProps.params.id);
 
-  let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+  let course = {id: '', watchHref: '', title: '', author_id: '', length: '', category: ''};
 
   if (courseId && state.courses.length) {
     course = getCourseById(state.courses, courseId);

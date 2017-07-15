@@ -6,6 +6,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
     author_name = serializers.CharField(source='author', read_only=True)
     id = serializers.ReadOnlyField()
     watchHref = serializers.ReadOnlyField()
+    author_id = serializers.IntegerField()
 
     class Meta:
         model = Course
