@@ -10,14 +10,15 @@ const AuthorList = ({authors}) => {
       <thead>
       <tr>
         <th>
+
+        </th>
+        <th>
           First name
         </th>
         <th>
           Last name
         </th>
-        {/*<th>*/}
-          {/*Field*/}
-        {/*</th>*/}
+
       </tr>
       </thead>
       <tbody>

@@ -10,13 +10,7 @@ class LoginApi {
       form_data.append(key, login[key]);
     }
 
-    return fetch('/api-auth/login/', {method: "POST", body: form_data, credentials: 'same-origin', redirect: 'manual'})
-    .then(response => {
-      console.log(response);
-
-      return response;
-    })
-
+    return fetch('/api-auth/login/', {method: "POST", body: form_data, credentials: 'same-origin', redirect: 'manual'});
   }
 
 }
