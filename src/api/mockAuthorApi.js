@@ -75,7 +75,7 @@ class AuthorApi {
   static insertAuthor(author) {
     return fetch(getPostRequest(author))
       .then(handleErrors)
-      .then(() => author);
+      .then(response => response.json());
   }
 
   static deleteAuthor(authorId) {

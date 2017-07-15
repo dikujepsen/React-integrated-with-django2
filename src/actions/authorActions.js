@@ -39,6 +39,7 @@ export function saveAuthor(author) {
       promise = AuthorApi.saveAuthor(author).then(savedAuthor => {
         dispatch(updateAuthorSuccess(savedAuthor))});
     } else {
+      debugger;
       promise = AuthorApi.insertAuthor(author).then(savedAuthor => {
         dispatch(createAuthorSuccess(savedAuthor))});
     }
