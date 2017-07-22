@@ -8,7 +8,7 @@ const CourseListRow = ({course}) => {
   return (
     <tr>
       <td><a href={course.watchHref} target="_blank">Watch</a></td>
-      <td><Link to={'/course/' + course.id}>{course.title} </Link></td>
+      <td><Link to={'/courses/' + course.id}>{course.title} </Link></td>
       <td>{course.author_name}</td>
       <td>{course.category}</td>
       <td>{course.length}</td>
