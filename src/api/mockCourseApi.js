@@ -1,4 +1,5 @@
 import delay from './delay';
+import commonApi from './commonApi';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -55,39 +56,27 @@ const generateId = (course) => {
   return replaceAll(course.title, ' ', '-');
 };
 
+
+let relativeLink = 'courses/';
 class CourseApi {
   static getAllCourses() {
-    return fetch('/api/courses/')
+    return fetch('/api/' + relativeLink)
     .then(response => response.json()
       .then(data => data.results))
 
   }
 
+
   static saveCourse(course) {
-    course = Object.assign({}, course); // to avoid manipulating object passed in.
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Simulate server-side validation
-        const minCourseTitleLength = 1;
-        if (course.title.length < minCourseTitleLength) {
-          reject(`Title must be at least ${minCourseTitleLength} characters.`);
-        }
+    return fetch(commonApi.getPutRequest(course, relativeLink))
+      .then(commonApi.handleErrors)
+      .then(() => course);
+  }
 
-        if (course.id) {
-          const existingCourseIndex = courses.findIndex(a => a.id == course.id);
-          courses.splice(existingCourseIndex, 1, course);
-        } else {
-          //Just simulating creation here.
-          //The server would generate ids and watchHref's for new courses in a real app.
-          //Cloning so copy returned is passed by value rather than by reference.
-          course.id = generateId(course);
-          course.watchHref = `http://www.pluralsight.com/courses/${course.id}`;
-          courses.push(course);
-        }
-
-        resolve(course);
-      }, delay);
-    });
+  static insertCourse(course) {
+    return fetch(commonApi.getPostRequest(course, relativeLink))
+      .then(commonApi.handleErrors)
+      .then(response => response.json());
   }
 
   static deleteCourse(courseId) {

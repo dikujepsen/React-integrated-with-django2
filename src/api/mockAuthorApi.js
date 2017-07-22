@@ -27,23 +27,25 @@ const authors = [
 
 
 
-
+let relativeLink = 'authors/';
 class AuthorApi {
+
+
   static getAllAuthors() {
-    return fetch('/api/authors/')
+    return fetch('/api/' + relativeLink)
       .then(response => response.json()
         .then(data => data.results));
   }
 
 
   static saveAuthor(author) {
-    return fetch(commonApi.getPutRequest(author))
+    return fetch(commonApi.getPutRequest(author, relativeLink))
       .then(commonApi.handleErrors)
       .then(() => author);
   }
 
   static insertAuthor(author) {
-    return fetch(commonApi.getPostRequest(author))
+    return fetch(commonApi.getPostRequest(author, relativeLink))
       .then(commonApi.handleErrors)
       .then(response => response.json());
   }

@@ -25,15 +25,16 @@ function getRequest(author, url, method) {
   return request;
 }
 
+let api = '/api/';
 
-function getPutRequest(author) {
-  let request = getRequest(author, 'http://localhost:8000/api/authors/' + author.id + '/', "PUT");
+function getPutRequest(data, relativeLink) {
+  let request = getRequest(data, api + relativeLink + data.id + '/', "PUT");
   return request;
 }
 
 
-function getPostRequest(author) {
-  let request = getRequest(author, 'http://localhost:8000/api/authors/', "POST");
+function getPostRequest(data, relativeLink) {
+  let request = getRequest(data, api + relativeLink, "POST");
   return request;
 }
 

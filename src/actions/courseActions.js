@@ -29,14 +29,21 @@ export function loadCourses() {
 }
 
 export function saveCourse(course) {
-  return function(dispatch, getState) {
+  return function(dispatch, getState){
     dispatch(beginAjaxCall());
-    return courseApi.saveCourse(course).then(savedCourse => {
-      course.id ? dispatch(updateCourseSuccess(savedCourse)) :
-      dispatch(createCourseSuccess(savedCourse));
-    }).catch(error => {
+    let promise = undefined;
+    if (course.id) {
+      promise = courseApi.saveCourse(course).then(savedCourse => {
+        dispatch(updateCourseSuccess(savedCourse))});
+    } else {
+      promise = courseApi.insertCourse(course).then(savedCourse => {
+        dispatch(createCourseSuccess(savedCourse))});
+    }
+    return promise.catch(error => {
       dispatch(ajaxCallError(error));
       throw(error);
     });
-  };
+
+  }
+
 }
