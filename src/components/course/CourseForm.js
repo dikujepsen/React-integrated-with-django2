@@ -4,7 +4,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 
 
-const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
+const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors, isEdit}) => {
   return (
     <form>
       <h1>
@@ -16,6 +16,15 @@ const CourseForm = ({course, allAuthors, onSave, onChange, saving, errors}) => {
         value={course.title}
         onChange={onChange}
         error={errors.title} />
+
+      <TextInput
+        name="watchHref"
+        label = "Watch link"
+        value={course.watchHref}
+        onChange={onChange}
+        error={errors.watchHref}
+        readonly={isEdit}
+      />
 
       <SelectInput
         name="author_id"
@@ -58,7 +67,8 @@ CourseForm.propTypes = {
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
-  errors: PropTypes.object
+  errors: PropTypes.object,
+  isEdit: PropTypes.bool
 };
 
 export default CourseForm;

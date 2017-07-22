@@ -1,4 +1,5 @@
 import delay from './delay';
+import commonApi from './commonApi';
 
 // This file mocks a web API by working with the hard-coded data below.
 // It uses setTimeout to simulate the delay of an AJAX call.
@@ -21,41 +22,10 @@ const authors = [
   }
 ];
 
-//This would be performed on the server in a real app. Just stubbing in.
-const generateId = (author) => {
-  return author.firstName.toLowerCase() + '-' + author.lastName.toLowerCase();
-};
 
 
-function handleErrors(response) {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-}
-
-function getRequest(author, url, method) {
-  let csrftoken = $('#container').data('csrftoken');
-  let request = new Request(url, {
-    method: method,
-    headers: {'Content-Type': 'application/json',
-      'X-CSRFTOKEN': csrftoken},
-    body: JSON.stringify(author),
-    credentials: 'same-origin'
-  });
-  return request;
-}
 
 
-function getPutRequest(author) {
-  let request = getRequest(author, 'http://localhost:8000/api/authors/' + author.id + '/', "PUT");
-  return request;
-}
-
-function getPostRequest(author) {
-  let request = getRequest(author, 'http://localhost:8000/api/authors/', "POST");
-  return request;
-}
 
 
 class AuthorApi {
@@ -67,14 +37,14 @@ class AuthorApi {
 
 
   static saveAuthor(author) {
-    return fetch(getPutRequest(author))
-      .then(handleErrors)
+    return fetch(commonApi.getPutRequest(author))
+      .then(commonApi.handleErrors)
       .then(() => author);
   }
 
   static insertAuthor(author) {
-    return fetch(getPostRequest(author))
-      .then(handleErrors)
+    return fetch(commonApi.getPostRequest(author))
+      .then(commonApi.handleErrors)
       .then(response => response.json());
   }
 

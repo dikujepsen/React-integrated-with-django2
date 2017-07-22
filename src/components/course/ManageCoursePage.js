@@ -11,10 +11,12 @@ class ManageCoursePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
+    let isEdit = Boolean(props.params.id);
     this.state = {
       course: Object.assign({}, this.props.course),
       errors: {},
-      saving: false
+      saving: false,
+      isEdit: isEdit
     };
 
     this.saveCourse = this.saveCourse.bind(this);
@@ -60,6 +62,7 @@ class ManageCoursePage extends React.Component {
         course={this.state.course}
         errors ={this.state.errors}
         saving={this.state.saving}
+        isEdit={this.state.isEdit}
       />
     );
   }
