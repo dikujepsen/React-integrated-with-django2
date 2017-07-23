@@ -7,7 +7,7 @@ class Course(models.Model):
     length = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey('Author')
+    author_id = models.ForeignKey('Author')
 
     class Meta:
         ordering = ('title',)
@@ -23,3 +23,6 @@ class Author(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.firstName, self.lastName)
+
+    def author_name(self):
+        return self.__str__()

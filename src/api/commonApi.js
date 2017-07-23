@@ -49,10 +49,9 @@ class commonRestApi {
   }
 
   save(data) {
-    debugger;
     return fetch(this.getPutRequest(data))
       .then(this.handleErrors)
-      .then(() => data);
+      .then(response => response.json());
   }
 
   insert(data) {

@@ -3,7 +3,7 @@ from .models import Course, Author
 
 
 class CourseHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
-    author_name = serializers.CharField(source='author', read_only=True)
+    author_name = serializers.CharField(source='author_id', read_only=True)
     id = serializers.ReadOnlyField()
     watchHref = serializers.ReadOnlyField()
 
@@ -13,7 +13,7 @@ class CourseHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CourseModelSerializer(serializers.ModelSerializer):
-    author_name = serializers.CharField(source='author', read_only=True)
+    author_name = serializers.CharField(source='author_id', read_only=True)
     id = serializers.ReadOnlyField()
 
     class Meta:
@@ -26,6 +26,7 @@ class CourseModelSerializer(serializers.ModelSerializer):
 # var data = new FormData();
 # data.append('username', 'jacob');;
 # data.append('password', '1234');data.append('csrfmiddlewaretoken', 'CNZN3UjPGcCXXpXVEYprK0HZXtRC6N2XPmnFPZZRQJCi8zVgQbDJXqSUwx9ur7bD');fetch('http://localhost:8000/api-auth/login/', {method: "POST", body: data, credentials: 'same-origin'});
+
 
 class AuthorHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
