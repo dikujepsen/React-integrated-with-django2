@@ -2,7 +2,7 @@
  * Created by jacob on 29-06-17.
  */
 import * as types from './actionTypes';
-import AuthorApi from '../api/mockAuthorApi';
+import authorApi from '../api/mockAuthorApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 
@@ -18,12 +18,14 @@ export function updateAuthorSuccess(author) {
   return {type: types.UPDATE_AUTHOR_SUCCESS, author};
 }
 
-
+export function deleteAuthorSuccess(courseId) {
+  return {type: types.DELETE_AUTHOR_SUCCESS, courseId};
+}
 
 export function loadAuthors() {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return AuthorApi.getAllAuthors().then(authors => {
+    return authorApi.getAll().then(authors => {
       dispatch(loadAuthorsSuccess(authors));
     }).catch(error => {
       throw(error);
@@ -36,10 +38,10 @@ export function saveAuthor(author) {
     dispatch(beginAjaxCall());
     let promise = undefined;
     if (author.id) {
-      promise = AuthorApi.saveAuthor(author).then(savedAuthor => {
+      promise = authorApi.save(author).then(savedAuthor => {
         dispatch(updateAuthorSuccess(savedAuthor))});
     } else {
-      promise = AuthorApi.insertAuthor(author).then(savedAuthor => {
+      promise = authorApi.insert(author).then(savedAuthor => {
         dispatch(createAuthorSuccess(savedAuthor))});
     }
     return promise.catch(error => {
@@ -47,6 +49,20 @@ export function saveAuthor(author) {
       throw(error);
     });
 
+  };
+}
+
+export function deleteAuthor(authorId) {
+  return function(dispatch) {
+    dispatch(beginAjaxCall());
+    return authorApi.delete(authorId).then(success => {
+      if (success) {
+        dispatch(deleteAuthorSuccess(authorId));
+      }
+      return success;
+    }).catch(error => {
+      throw(error);
+    });
   };
 }
 

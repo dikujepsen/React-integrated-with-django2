@@ -1,66 +1,12 @@
-import delay from './delay';
-import commonApi from './commonApi';
+import commonRestApi from './commonApi';
 
-// This file mocks a web API by working with the hard-coded data below.
-// It uses setTimeout to simulate the delay of an AJAX call.
-// All calls return promises.
-const authors = [
-  {
-    id: 'cory-house',
-    firstName: 'Cory',
-    lastName: 'House'
-  },
-  {
-    id: 'scott-allen',
-    firstName: 'Scott',
-    lastName: 'Allen'
-  },
-  {
-    id: 'dan-wahlin',
-    firstName: 'Dan',
-    lastName: 'Wahlin'
-  }
-];
-
-
-
-
-
-
-let relativeLink = 'authors/';
-class AuthorApi {
-
-
-  static getAllAuthors() {
-    return fetch('/api/' + relativeLink)
-      .then(response => response.json()
-        .then(data => data.results));
+class AuthorApi extends commonRestApi {
+  constructor(relativeLink) {
+    super(relativeLink);
   }
 
-
-  static saveAuthor(author) {
-    return fetch(commonApi.getPutRequest(author, relativeLink))
-      .then(commonApi.handleErrors)
-      .then(() => author);
-  }
-
-  static insertAuthor(author) {
-    return fetch(commonApi.getPostRequest(author, relativeLink))
-      .then(commonApi.handleErrors)
-      .then(response => response.json());
-  }
-
-  static deleteAuthor(authorId) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        const indexOfAuthorToDelete = authors.findIndex(author => {
-          author.id == authorId;
-        });
-        authors.splice(indexOfAuthorToDelete, 1);
-        resolve();
-      }, delay);
-    });
-  }
 }
 
-export default AuthorApi;
+let authorApi = new AuthorApi('authors/')
+
+export default authorApi;

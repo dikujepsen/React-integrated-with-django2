@@ -15,8 +15,8 @@ export function updateCourseSuccess(course) {
   return {type: types.UPDATE_COURSE_SUCCESS, course};
 }
 
-export function deleteCoursesSuccess(courseId) {
-  return {type: types.DELETE_COURSES_SUCCESS, courseId};
+export function deleteCourseSuccess(courseId) {
+  return {type: types.DELETE_COURSE_SUCCESS, courseId};
 }
 
 
@@ -55,7 +55,7 @@ export function deleteCourse(courseId) {
     dispatch(beginAjaxCall());
     return courseApi.delete(courseId).then(success => {
       if (success) {
-        dispatch(deleteCoursesSuccess(courseId));
+        dispatch(deleteCourseSuccess(courseId));
       }
       return success;
     }).catch(error => {
