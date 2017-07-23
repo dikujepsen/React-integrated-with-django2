@@ -7,7 +7,7 @@ class Course(models.Model):
     length = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
-    author_id = models.ForeignKey('Author')
+    author_id = models.ForeignKey('Author', on_delete=models.PROTECT)
 
     class Meta:
         ordering = ('title',)

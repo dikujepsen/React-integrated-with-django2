@@ -16,7 +16,7 @@ export default (
     <IndexRoute component={HomePage} />
     <Route path="courses" component={CoursesPage} />
     <Route path="courses/:id" component={ManageCoursePage} />
-    <Route path="course" component={ManageCoursePage} />
+    <Route path="courses/add/" component={ManageCoursePage} />
     <Route path="authors" component={AuthorsPage} />
     <Route path="author(/:id)" component={ManageAuthorPage} />
     <Route path="about" component={AboutPage} />

@@ -11,7 +11,8 @@ class ManageCoursePage extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    let isEdit = Boolean(props.params.id);
+
+    let isEdit = props.params.id !== 'add';
     this.state = {
       course: Object.assign({}, this.props.course),
       errors: {},
