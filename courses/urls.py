@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 
 # Create a router and register our viewsets with it.
 router = DefaultRouter()
-router.register(r'courses', views.CourseViewSet)
+router.register(r'courses', views.CourseHyperLinkedViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls))

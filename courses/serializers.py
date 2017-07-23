@@ -2,11 +2,10 @@ from rest_framework import serializers
 from .models import Course, Author
 
 
-class CourseSerializer(serializers.HyperlinkedModelSerializer):
+class CourseHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
     author_name = serializers.CharField(source='author', read_only=True)
     id = serializers.ReadOnlyField()
     watchHref = serializers.ReadOnlyField()
-    author_id = serializers.IntegerField()
 
     class Meta:
         model = Course
@@ -19,7 +18,7 @@ class CourseSerializer(serializers.HyperlinkedModelSerializer):
 # data.append('username', 'jacob');;
 # data.append('password', '1234');data.append('csrfmiddlewaretoken', 'CNZN3UjPGcCXXpXVEYprK0HZXtRC6N2XPmnFPZZRQJCi8zVgQbDJXqSUwx9ur7bD');fetch('http://localhost:8000/api-auth/login/', {method: "POST", body: data, credentials: 'same-origin'});
 
-class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+class AuthorHyperlinkedSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
 
     class Meta:
