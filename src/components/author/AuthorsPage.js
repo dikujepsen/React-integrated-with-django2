@@ -16,7 +16,7 @@ class AuthorsPage extends React.Component {
   }
 
   redirectToAddCoursePage() {
-    browserHistory.push('/author');
+    browserHistory.push('/authors/add');
   }
 
   deleteAuthor(event) {

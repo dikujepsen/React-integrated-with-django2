@@ -13,7 +13,7 @@ const AuthorListRow = ({author, onDelete}) => {
                 data-id={author.id}
                 className="btn btn-primary">Delete</button>
       </td>
-      <td><Link to={'/author/' + author.id}>Edit author </Link></td>
+      <td><Link to={'/authors/' + author.id}>Edit author </Link></td>
       <td>{author.firstName}</td>
       <td>{author.lastName}</td>
     </tr>
