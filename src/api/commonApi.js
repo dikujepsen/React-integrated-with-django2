@@ -66,9 +66,12 @@ class commonRestApi {
 
   delete(id) {
     return fetch(this.getDeleteRequest(id))
-      .then(this.handleErrors)
       .then(response => {
-        return response.ok;
+        let success = response.ok || response.status === 404;
+        if (success) {
+          return success;
+        }
+        return this.handleErrors(response);
       });
   }
 

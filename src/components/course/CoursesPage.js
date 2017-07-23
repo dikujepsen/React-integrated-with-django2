@@ -32,14 +32,12 @@ class CoursesPage extends React.Component {
 
     this.props.actions.deleteCourse(courseId)
       .then(success => {
-
         if (success) {
           toastr.success("Course deleted");
         }
       })
       .catch(error => {
         toastr.error(error);
-        this.setState({saving: false});
       });
   }
 
