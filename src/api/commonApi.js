@@ -15,7 +15,7 @@ class commonRestApi {
     return response;
   }
 
-  getRequest(author, url, method) {
+  getRequest(data, url, method) {
     let csrftoken = $('#container').data('csrftoken');
     let request = new Request(url, {
       method: method,
@@ -23,7 +23,7 @@ class commonRestApi {
         'Content-Type': 'application/json',
         'X-CSRFTOKEN': csrftoken
       },
-      body: JSON.stringify(author),
+      body: JSON.stringify(data),
       credentials: 'same-origin'
     });
     return request;
@@ -42,6 +42,10 @@ class commonRestApi {
     return request;
   }
 
+  getDeleteRequest(id) {
+    return this.getRequest(id, this.api + this.relativeLink + id + '/', "DELETE");
+  }
+
   getAll() {
     return fetch(this.api + this.relativeLink)
       .then(response => response.json()
@@ -58,6 +62,14 @@ class commonRestApi {
     return fetch(this.getPostRequest(data))
       .then(this.handleErrors)
       .then(response => response.json());
+  }
+
+  delete(id) {
+    return fetch(this.getDeleteRequest(id))
+      .then(this.handleErrors)
+      .then(response => {
+        return response.ok;
+      });
   }
 
 }
