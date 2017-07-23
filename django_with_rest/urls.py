@@ -20,7 +20,7 @@ from django.conf.urls import url, include
 from rest_framework.schemas import get_schema_view
 from snippets import views as snippets_views
 from courses import views as courses_views
-from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.routers import DefaultRouter
 
 schema_view = get_schema_view(title='Pastebin API')
 default_router = DefaultRouter()

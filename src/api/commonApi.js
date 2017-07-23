@@ -1,6 +1,7 @@
 /**
  * Created by jacob on 09-07-17.
  */
+import constants from '../constants/constants';
 
 class commonRestApi {
   constructor(relativeLink) {
@@ -65,13 +66,25 @@ class commonRestApi {
   }
 
   delete(id) {
+    let savedResponse = undefined;
     return fetch(this.getDeleteRequest(id))
       .then(response => {
         let success = response.ok || response.status === 404;
         if (success) {
           return success;
         }
-        return this.handleErrors(response);
+        savedResponse = response;
+        return response.text();
+      })
+      .then(responseBody => {
+        if (responseBody !== true) {
+          if (responseBody === constants.DELETE_FAILED) {
+            throw Error(responseBody);
+          } else {
+            this.handleErrors(savedResponse);
+          }
+        }
+        return responseBody;
       });
   }
 

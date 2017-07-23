@@ -18,8 +18,8 @@ export function updateAuthorSuccess(author) {
   return {type: types.UPDATE_AUTHOR_SUCCESS, author};
 }
 
-export function deleteAuthorSuccess(courseId) {
-  return {type: types.DELETE_AUTHOR_SUCCESS, courseId};
+export function deleteAuthorSuccess(authorId) {
+  return {type: types.DELETE_AUTHOR_SUCCESS, authorId};
 }
 
 export function loadAuthors() {
@@ -45,7 +45,7 @@ export function saveAuthor(author) {
         dispatch(createAuthorSuccess(savedAuthor))});
     }
     return promise.catch(error => {
-      dispatch(ajaxCallError(error));
+      dispatch(ajaxCallError());
       throw(error);
     });
 
@@ -61,6 +61,9 @@ export function deleteAuthor(authorId) {
       }
       return success;
     }).catch(error => {
+      if (error.message === 'DELETE_FAILED') {
+        dispatch(ajaxCallError());
+      }
       throw(error);
     });
   };
