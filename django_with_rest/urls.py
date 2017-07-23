@@ -20,22 +20,30 @@ from django.conf.urls import url, include
 from rest_framework.schemas import get_schema_view
 from snippets import views as snippets_views
 from courses import views as courses_views
-from rest_framework.routers import DefaultRouter
+from rest_framework.routers import DefaultRouter, SimpleRouter
 
 schema_view = get_schema_view(title='Pastebin API')
-router = DefaultRouter()
-router.register(r'snippets', snippets_views.SnippetViewSet)
-router.register(r'users', snippets_views.UserViewSet)
-router.register(r'hyperlinkedcourses', courses_views.CourseHyperLinkedViewSet)
-router.register(r'hyperlinkedauthors', courses_views.AuthorHyperlinkedViewSet)
+default_router = DefaultRouter()
+default_router.register(r'snippets', snippets_views.SnippetViewSet)
+default_router.register(r'users', snippets_views.UserViewSet)
 
+# router.register(r'hyperlinkedcourses', courses_views.CourseHyperLinkedViewSet, base_name='hyperlinkedcourses')
+# router.register(r'hyperlinkedauthors', courses_views.AuthorHyperlinkedViewSet)
+default_router.register(r'courses', courses_views.CourseModelViewSet)
+default_router.register(r'authors', courses_views.AuthorModelViewSet)
+
+
+hyperlinked_router = DefaultRouter()
+hyperlinked_router.register(r'courses', courses_views.CourseHyperLinkedViewSet)
+hyperlinked_router.register(r'authors', courses_views.AuthorHyperlinkedViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     url(r'^schema/$', schema_view),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(router.urls)),
+    url(r'^api/', include(default_router.urls)),
+    url(r'^api/hyperlinked/', include(hyperlinked_router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^.*', include('react.urls'))
 ]
