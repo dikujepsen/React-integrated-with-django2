@@ -26,9 +26,6 @@ schema_view = get_schema_view(title='Pastebin API')
 default_router = DefaultRouter()
 default_router.register(r'snippets', snippets_views.SnippetViewSet)
 default_router.register(r'users', snippets_views.UserViewSet)
-
-# router.register(r'hyperlinkedcourses', courses_views.CourseHyperLinkedViewSet, base_name='hyperlinkedcourses')
-# router.register(r'hyperlinkedauthors', courses_views.AuthorHyperlinkedViewSet)
 default_router.register(r'courses', courses_views.CourseModelViewSet)
 default_router.register(r'authors', courses_views.AuthorModelViewSet)
 
@@ -37,8 +34,7 @@ hyperlinked_router = DefaultRouter()
 hyperlinked_router.register(r'courses', courses_views.CourseHyperLinkedViewSet)
 hyperlinked_router.register(r'authors', courses_views.AuthorHyperlinkedViewSet)
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+
 urlpatterns = [
     url(r'^schema/$', schema_view),
     url(r'^admin/', admin.site.urls),
