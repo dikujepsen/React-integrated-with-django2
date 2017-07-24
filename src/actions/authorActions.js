@@ -52,12 +52,12 @@ export function saveAuthor(author) {
   };
 }
 
-export function deleteAuthor(authorId) {
+export function deleteAuthor(author) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return authorApi.delete(authorId).then(success => {
+    return authorApi.delete(author).then(success => {
       if (success) {
-        dispatch(deleteAuthorSuccess(authorId));
+        dispatch(deleteAuthorSuccess(author));
       }
       return success;
     }).catch(error => {

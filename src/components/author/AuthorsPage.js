@@ -22,8 +22,8 @@ class AuthorsPage extends React.Component {
   deleteAuthor(event) {
     event.preventDefault();
     let authorId = $(event.target).data('id');
-
-    this.props.actions.deleteAuthor(authorId)
+    let author = this.props.courses.filter(author => author.id === authorId)[0];
+    this.props.actions.deleteAuthor(author)
       .then(success => {
         if (success) {
           toastr.success("Author deleted");
