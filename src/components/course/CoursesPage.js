@@ -29,8 +29,8 @@ class CoursesPage extends React.Component {
   deleteCourse(event) {
     event.preventDefault();
     let courseId = $(event.target).data('id');
-
-    this.props.actions.deleteCourse(courseId)
+    let course = this.props.courses.filter(course => course.id === courseId)[0];
+    this.props.actions.deleteCourse(course)
       .then(success => {
         if (success) {
           toastr.success("Course deleted");

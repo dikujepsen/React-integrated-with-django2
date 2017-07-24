@@ -50,12 +50,12 @@ export function saveCourse(course) {
   }
 }
 
-export function deleteCourse(courseId) {
+export function deleteCourse(course) {
   return function(dispatch) {
     dispatch(beginAjaxCall());
-    return courseApi.delete(courseId).then(success => {
+    return courseApi.delete(course.id).then(success => {
       if (success) {
-        dispatch(deleteCourseSuccess(courseId));
+        dispatch(deleteCourseSuccess(course));
       }
       return success;
     }).catch(error => {
