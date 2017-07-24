@@ -18,8 +18,8 @@ export function updateAuthorSuccess(author) {
   return {type: types.UPDATE_AUTHOR_SUCCESS, author};
 }
 
-export function deleteAuthorSuccess(authorId) {
-  return {type: types.DELETE_AUTHOR_SUCCESS, authorId};
+export function deleteAuthorSuccess(author) {
+  return {type: types.DELETE_AUTHOR_SUCCESS, author};
 }
 
 export function loadAuthors() {

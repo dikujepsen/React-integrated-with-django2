@@ -15,8 +15,8 @@ export function updateCourseSuccess(course) {
   return {type: types.UPDATE_COURSE_SUCCESS, course};
 }
 
-export function deleteCourseSuccess(courseId) {
-  return {type: types.DELETE_COURSE_SUCCESS, courseId};
+export function deleteCourseSuccess(course) {
+  return {type: types.DELETE_COURSE_SUCCESS, course};
 }
 
 
