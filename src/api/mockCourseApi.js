@@ -1,12 +1,12 @@
 import commonRestApi from './commonApi';
 
 class CourseApi extends commonRestApi {
-  constructor(relativeLink) {
-    super(relativeLink);
+  constructor() {
+    super('courses/', 'courses');
   }
 
 }
 
-let courseApi = new CourseApi('courses/')
+let courseApi = new CourseApi();
 
 export default courseApi;

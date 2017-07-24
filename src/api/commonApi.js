@@ -4,9 +4,13 @@
 import constants from '../constants/constants';
 
 class commonRestApi {
-  constructor(relativeLink) {
+  constructor(relativeLink, module) {
     this.relativeLink = relativeLink;
     this.api = '/api/';
+    let coreapi = window.coreapi;
+    this.client = new coreapi.Client();
+    this.schema = window.schema;
+    this.module = module;
   }
 
   handleErrors(response) {
@@ -48,9 +52,9 @@ class commonRestApi {
   }
 
   getAll() {
-    return fetch(this.api + this.relativeLink)
-      .then(response => response.json()
-        .then(data => data.results));
+    return this.client.action(this.schema,
+      [this.module, 'list'])
+      .then(data => data.results);
   }
 
   save(data) {

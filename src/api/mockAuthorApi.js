@@ -1,12 +1,11 @@
 import commonRestApi from './commonApi';
 
 class AuthorApi extends commonRestApi {
-  constructor(relativeLink) {
-    super(relativeLink);
+  constructor() {
+    super('authors/', 'authors');
   }
-
 }
 
-let authorApi = new AuthorApi('authors/')
+let authorApi = new AuthorApi();
 
 export default authorApi;

@@ -44,12 +44,12 @@ class ManageAuthorPage extends React.Component {
     let author = this.state.author;
     const minAuthorNameLength = 3;
     if (author.firstName.length < minAuthorNameLength) {
-      this.setValidationError(`First Name must be at least ${minAuthorNameLength} characters.`);
+      this.setValidationError(`First name must be at least ${minAuthorNameLength} characters.`);
       return;
     }
 
     if (author.lastName.length < minAuthorNameLength) {
-      this.setValidationError(`Last Name must be at least ${minAuthorNameLength} characters.`);
+      this.setValidationError(`Last name must be at least ${minAuthorNameLength} characters.`);
       return;
     }
 

@@ -1,3 +1,4 @@
+{% load staticfiles %}
 {% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
@@ -5,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title123</title>
+  <script src="{% static 'rest_framework/js/coreapi-0.1.0.js' %}"></script>
+  <script src="{% url 'api-docs:schema-js' %}"></script>
 </head>
 <body>
 {% csrf_token %}

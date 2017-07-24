@@ -37,9 +37,39 @@ class ManageCoursePage extends React.Component {
     return this.setState({course: course});
   }
 
+  setValidationError(message) {
+    toastr.error(message);
+    this.setState({saving: false});
+  }
+
   saveCourse(event) {
     event.preventDefault();
     this.setState({saving: true});
+
+    let course = this.state.course;
+
+
+    if (course.title === '') {
+      this.setValidationError('Title must be set');
+      return;
+    }
+
+    if (course.watchHref === '') {
+      this.setValidationError('Watch link must be set');
+      return;
+    }
+
+    if (course.author_id === '') {
+      this.setValidationError('Author must be set');
+      return;
+    }
+
+    if (course.watchHref === '') {
+      this.setValidationError('Watch link must be set');
+      return;
+    }
+
+
     this.props.actions.saveCourse(this.state.course)
       .then(() => this.redirect())
       .catch(error => {
