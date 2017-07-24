@@ -1,26 +1,23 @@
 import * as types from '../actions/actionTypes';
 import initialState from './initialState';
+import SimpleReducer from './simpleReducer';
 
-export default function authorReducer(state = initialState.authors, action) {
-  switch(action.type) {
-    case types.LOAD_AUTHORS_SUCCESS:
-      return action.authors;
-    case types.CREATE_AUTHOR_SUCCESS:
-      return [
-        ...state,
-        Object.assign({}, action.author)
-      ];
-    case types.UPDATE_AUTHOR_SUCCESS:
-      return [
-        ...state.filter(author => author.id !== action.author.id),
-        Object.assign({}, action.author)
-      ];
-    case types.DELETE_AUTHOR_SUCCESS:
-      return [
-        ...state.filter(author => author.id !== action.author.id)
-      ];
-
-    default:
-      return state;
+const reducerSpecific = {
+  initialState: initialState.authors,
+  dataList: function(action) {
+    return action.authors;
+  },
+  dataItem: function(action) {
+    return action.author;
+  },
+  actionTypes: {
+    getAll: types.LOAD_AUTHORS_SUCCESS,
+    add: types.CREATE_AUTHOR_SUCCESS,
+    update: types.UPDATE_AUTHOR_SUCCESS,
+    delete: types.DELETE_AUTHOR_SUCCESS
   }
-}
+};
+
+let authorReducer = SimpleReducer(reducerSpecific);
+export default authorReducer
+
