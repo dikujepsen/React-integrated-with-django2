@@ -6,6 +6,18 @@ import * as courseActions from '../../actions/courseActions';
 import CourseForm from './CourseForm';
 import toastr from 'toastr';
 
+function setValidationError(message) {
+  toastr.error(message);
+}
+
+
+function IsEmpty(value, message) {
+  if (value === '') {
+    toastr.error(message + ' is required');
+    return true;
+  }
+  return false;
+}
 
 class ManageCoursePage extends React.Component {
   constructor(props, context) {
@@ -37,39 +49,28 @@ class ManageCoursePage extends React.Component {
     return this.setState({course: course});
   }
 
-  setValidationError(message) {
-    toastr.error(message);
-    this.setState({saving: false});
+
+  isValid(course) {
+
+    return IsEmpty(course.title, 'Title') ||
+      IsEmpty(course.watchHref, 'Watch link') ||
+      IsEmpty(course.author_id, 'Author') ||
+      IsEmpty(course.category, 'Category') ||
+      IsEmpty(course.length, 'Length');
   }
 
   saveCourse(event) {
     event.preventDefault();
-    this.setState({saving: true});
+
 
     let course = this.state.course;
 
 
-    if (course.title === '') {
-      this.setValidationError('Title must be set');
+    if (this.isValid(course)) {
       return;
     }
 
-    if (course.watchHref === '') {
-      this.setValidationError('Watch link must be set');
-      return;
-    }
-
-    if (course.author_id === '') {
-      this.setValidationError('Author must be set');
-      return;
-    }
-
-    if (course.watchHref === '') {
-      this.setValidationError('Watch link must be set');
-      return;
-    }
-
-
+    this.setState({saving: true});
     this.props.actions.saveCourse(this.state.course)
       .then(() => this.redirect())
       .catch(error => {
