@@ -7,9 +7,6 @@ class commonRestApi {
   constructor(relativeLink, module) {
     this.relativeLink = relativeLink;
     this.api = '/api/';
-    let coreapi = window.coreapi;
-    this.client = new coreapi.Client();
-    this.schema = window.schema;
     this.module = module;
   }
 
@@ -52,8 +49,8 @@ class commonRestApi {
   }
 
   getAll() {
-    return this.client.action(this.schema,
-      [this.module, 'list'])
+    return fetch(this.api + this.relativeLink)
+      .then(response => response.json())
       .then(data => data.results);
   }
 
