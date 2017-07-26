@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import AuthorList from './AuthorList';
-import * as authorActions from '../../actions/authorActions';
+import authorActions from '../../actions/authorActions';
 import {browserHistory} from 'react-router';
 import toastr from 'toastr';
 import constants from '../../constants/constants';
@@ -23,7 +23,7 @@ class AuthorsPage extends React.Component {
     event.preventDefault();
     let authorId = $(event.target).data('id');
     let author = this.props.authors.filter(author => author.id === authorId)[0];
-    this.props.actions.deleteAuthor(author)
+    this.props.actions.deleteDataItem(author)
       .then(success => {
         if (success) {
           toastr.success("Author deleted");

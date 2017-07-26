@@ -1,7 +1,7 @@
 import {bindActionCreators} from 'redux';
 import React from 'react'; import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import * as authorActions from '../../actions/authorActions';
+import authorActions from '../../actions/authorActions';
 import AuthorForm from './AuthorForm';
 import toastr from 'toastr';
 
@@ -54,7 +54,7 @@ class ManageAuthorPage extends React.Component {
     }
 
 
-    this.props.actions.saveAuthor(this.state.author)
+    this.props.actions.saveDataItem(this.state.author)
       .then(() => this.redirect())
       .catch(error => {
         toastr.error(error);
