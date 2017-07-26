@@ -3,7 +3,7 @@
  */
 import React from 'react'; import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import * as courseActions from '../../actions/courseActions';
+import courseActions from '../../actions/courseActions';
 import {bindActionCreators} from 'redux';
 import CourseList from './CourseList';
 import {browserHistory} from 'react-router';
@@ -30,7 +30,7 @@ class CoursesPage extends React.Component {
     event.preventDefault();
     let courseId = $(event.target).data('id');
     let course = this.props.courses.filter(course => course.id === courseId)[0];
-    this.props.actions.deleteCourse(course)
+    this.props.actions.deleteDataItem(course)
       .then(success => {
         if (success) {
           toastr.success("Course deleted");
