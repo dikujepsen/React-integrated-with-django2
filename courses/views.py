@@ -10,6 +10,7 @@ class CourseHyperLinkedViewSet(viewsets.ModelViewSet):
     """
     queryset = Course.objects.all()
     serializer_class = CourseHyperlinkedSerializer
+    #print(CourseHyperlinkedSerializer().__repr__())
     #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 

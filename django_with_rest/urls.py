@@ -29,7 +29,8 @@ default_router.register(r'snippets', snippets_views.SnippetViewSet)
 default_router.register(r'users', snippets_views.UserViewSet)
 default_router.register(r'courses', courses_views.CourseModelViewSet)
 default_router.register(r'authors', courses_views.AuthorModelViewSet)
-
+#default_router.register(r'hyperlinkedcourses', courses_views.CourseHyperLinkedViewSet, base_name='hyperlinkedcourses')
+#default_router.register(r'hyperlinkedauthors', courses_views.AuthorHyperlinkedViewSet, base_name='hyperlinkedauthors')
 
 hyperlinked_router = DefaultRouter()
 hyperlinked_router.register(r'courses', courses_views.CourseHyperLinkedViewSet)
@@ -39,8 +40,9 @@ hyperlinked_router.register(r'authors', courses_views.AuthorHyperlinkedViewSet)
 urlpatterns = [
 #    url(r'^schema/$', schema_view),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/', include(default_router.urls)),
-    url(r'^api/hyperlinked/', include(hyperlinked_router.urls)),
+    url(r'^api/', include(default_router.urls), name='api'),
+    # url(r'^api/hyperlinked/', include(hyperlinked_router.urls), name='hyperlinked'),
+
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^.*', include('react.urls'))
 ]
