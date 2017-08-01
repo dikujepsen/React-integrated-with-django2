@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import courseApi from '../api/mockCourseApi';
+import courseApi from '../api/courseApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 import simpleActions from './simpleActions';
 

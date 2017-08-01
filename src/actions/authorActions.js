@@ -2,7 +2,7 @@
  * Created by jacob on 29-06-17.
  */
 import * as types from './actionTypes';
-import authorApi from '../api/mockAuthorApi';
+import authorApi from '../api/authorApi';
 import simpleActions from './simpleActions';
 
 export function loadAuthorsSuccess(authors) {
