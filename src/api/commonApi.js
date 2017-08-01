@@ -4,10 +4,8 @@
 import constants from '../constants/constants';
 
 class commonRestApi {
-  constructor(relativeLink, module) {
-    this.relativeLink = relativeLink;
-    this.api = '/api/';
-    this.module = module;
+  constructor(module) {
+    this.list_action = '/api/' + module + '/';
   }
 
   handleErrors(response) {
@@ -32,43 +30,42 @@ class commonRestApi {
   }
 
 
-
-  getPutRequest(data) {
-    let request = this.getRequest(data, this.api + this.relativeLink + data.id + '/', "PUT");
+  getUpdateRequest(data) {
+    let request = this.getRequest(data, data.url, "PUT");
     return request;
   }
 
 
-  getPostRequest(data) {
-    let request = this.getRequest(data, this.api + this.relativeLink, "POST");
+  getCreateRequest(data) {
+    let request = this.getRequest(data, this.list_action, "POST");
     return request;
   }
 
-  getDeleteRequest(id) {
-    return this.getRequest(id, this.api + this.relativeLink + id + '/', "DELETE");
+  getDeleteRequest(data) {
+    return this.getRequest(data, data.url, "DELETE");
   }
 
   getAll() {
-    return fetch(this.api + this.relativeLink)
+    return fetch(this.list_action)
       .then(response => response.json())
       .then(data => data.results);
   }
 
   save(data) {
-    return fetch(this.getPutRequest(data))
+    return fetch(this.getUpdateRequest(data))
       .then(this.handleErrors)
       .then(response => response.json());
   }
 
   insert(data) {
-    return fetch(this.getPostRequest(data))
+    return fetch(this.getCreateRequest(data))
       .then(this.handleErrors)
       .then(response => response.json());
   }
 
-  delete(id) {
+  delete(data) {
     let savedResponse = undefined;
-    return fetch(this.getDeleteRequest(id))
+    return fetch(this.getDeleteRequest(data))
       .then(response => {
         let success = response.ok || response.status === 404;
         if (success) {

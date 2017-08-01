@@ -2,7 +2,7 @@ import commonRestApi from './commonApi';
 
 class AuthorApi extends commonRestApi {
   constructor() {
-    super('authors/', 'authors');
+    super('authors');
   }
 }
 

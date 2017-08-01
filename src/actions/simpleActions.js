@@ -47,7 +47,7 @@ class simpleActions {
   deleteDataItem(dataItem) {
     return (dispatch) => {
       dispatch(beginAjaxCall());
-      return this.api.delete(dataItem.id).then(success => {
+      return this.api.delete(dataItem).then(success => {
         if (success) {
           dispatch(this.actions.deleteDataItemSuccess(dataItem));
         }
