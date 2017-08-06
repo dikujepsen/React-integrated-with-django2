@@ -19,5 +19,5 @@ const reducerSpecific = {
 };
 
 let courseReducer = SimpleReducer(reducerSpecific);
-export default courseReducer
+export default courseReducer;
 

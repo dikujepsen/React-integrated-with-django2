@@ -19,5 +19,5 @@ const reducerSpecific = {
 };
 
 let authorReducer = SimpleReducer(reducerSpecific);
-export default authorReducer
+export default authorReducer;
 
