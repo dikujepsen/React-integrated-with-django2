@@ -13,16 +13,22 @@ class AuthorsPage extends React.Component {
     super(props, context);
 
     this.deleteAuthor = this.deleteAuthor.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   redirectToAddCoursePage() {
     browserHistory.push('/authors/add');
   }
 
+  nextPage(event) {
+    event.preventDefault();
+    this.props.actions.loadNextPage(this.props.authors);
+  }
+
   deleteAuthor(event) {
     event.preventDefault();
     let authorId = $(event.target).data('id');
-    let author = this.props.authors.filter(author => author.id === authorId)[0];
+    let author = this.props.authors.results.filter(author => author.id === authorId)[0];
     this.props.actions.deleteDataItem(author)
       .then(success => {
         if (success) {
@@ -40,7 +46,7 @@ class AuthorsPage extends React.Component {
   }
 
   render() {
-    const authors = this.props.authors;
+    const authors = this.props.authors.results;
     return (
       <div >
         <h1>Authors</h1>
@@ -53,6 +59,11 @@ class AuthorsPage extends React.Component {
           onDelete={this.deleteAuthor}
 
         />
+        <button className="btn" type="button"
+                disabled={this.props.authors.next ? '' : 'disabled'}
+
+                onClick={this.nextPage}
+        >Next</button>
       </div>
     );
   }
@@ -61,7 +72,7 @@ class AuthorsPage extends React.Component {
 
 AuthorsPage.propTypes = {
   actions: PropTypes.object.isRequired,
-  authors: PropTypes.array.isRequired
+  authors: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

@@ -48,7 +48,21 @@ class commonRestApi {
   getAll() {
     return fetch(this.list_action)
       .then(response => response.json())
-      .then(data => data.results);
+      .then(response => {
+        response.page = 1;
+        return response;
+      });
+
+  }
+
+  getNextPage(data) {
+    return fetch(data.next)
+      .then(response => response.json())
+      .then(response => {
+        response.page = data.page + 1;
+        return response;
+      });
+
   }
 
   save(data) {

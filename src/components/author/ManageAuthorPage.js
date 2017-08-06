@@ -104,8 +104,8 @@ function mapStateToProps(state, ownProps) {
 
   let author = {id: '', firstName: '', lastName: ''};
 
-  if (authorId && state.authors.length) {
-    author = getAuthorById(state.authors, authorId);
+  if (authorId && state.authors.results.length) {
+    author = getAuthorById(state.authors.results, authorId);
   }
 
   return {

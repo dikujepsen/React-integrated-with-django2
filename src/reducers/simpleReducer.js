@@ -7,7 +7,6 @@ export default function SimpleReducer(reducerSpecific)
   return function (state = reducerSpecific.initialState, action) {
     switch (action.type) {
       case reducerSpecific.actionTypes.getAll:
-
         return reducerSpecific.dataList(action);
       case reducerSpecific.actionTypes.add:
         return [
@@ -28,5 +27,5 @@ export default function SimpleReducer(reducerSpecific)
       default:
         return state;
     }
-  }
+  };
 }
