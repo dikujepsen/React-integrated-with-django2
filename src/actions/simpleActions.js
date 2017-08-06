@@ -13,6 +13,7 @@ class simpleActions {
     this.saveDataItem = this.saveDataItem.bind(this);
     this.deleteDataItem = this.deleteDataItem.bind(this);
     this.loadNextPage = this.loadNextPage.bind(this);
+    this.loadPreviousPage = this.loadPreviousPage.bind(this);
   }
 
   loadAll() {
@@ -30,6 +31,17 @@ class simpleActions {
     return (dispatch, getState) => {
       dispatch(beginAjaxCall());
       return this.api.getNextPage(data).then(dataList => {
+        dispatch(this.actions.loadDataListSuccess(dataList));
+      }).catch(error => {
+        throw(error);
+      });
+    };
+  }
+
+  loadPreviousPage(data) {
+    return (dispatch, getState) => {
+      dispatch(beginAjaxCall());
+      return this.api.getPreviousPage(data).then(dataList => {
         dispatch(this.actions.loadDataListSuccess(dataList));
       }).catch(error => {
         throw(error);

@@ -62,7 +62,15 @@ class commonRestApi {
         response.page = data.page + 1;
         return response;
       });
+  }
 
+  getPreviousPage(data) {
+    return fetch(data.previous)
+      .then(response => response.json())
+      .then(response => {
+        response.page = data.page - 1;
+        return response;
+      });
   }
 
   save(data) {

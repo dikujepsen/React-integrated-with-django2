@@ -14,6 +14,7 @@ class AuthorsPage extends React.Component {
 
     this.deleteAuthor = this.deleteAuthor.bind(this);
     this.nextPage = this.nextPage.bind(this);
+    this.previousPage = this.previousPage.bind(this);
   }
 
   redirectToAddCoursePage() {
@@ -23,6 +24,11 @@ class AuthorsPage extends React.Component {
   nextPage(event) {
     event.preventDefault();
     this.props.actions.loadNextPage(this.props.authors);
+  }
+
+  previousPage(event) {
+    event.preventDefault();
+    this.props.actions.loadPreviousPage(this.props.authors);
   }
 
   deleteAuthor(event) {
@@ -59,9 +65,14 @@ class AuthorsPage extends React.Component {
           onDelete={this.deleteAuthor}
 
         />
+
+        <button className="btn" type="button"
+                disabled={this.props.authors.previous ? '' : 'disabled'}
+                onClick={this.previousPage}
+        >Previous</button>
+        &nbsp; Page {this.props.authors.page} &nbsp;
         <button className="btn" type="button"
                 disabled={this.props.authors.next ? '' : 'disabled'}
-
                 onClick={this.nextPage}
         >Next</button>
       </div>
