@@ -7,6 +7,8 @@ import authorActions from '../../actions/authorActions';
 import {browserHistory} from 'react-router';
 import toastr from 'toastr';
 import constants from '../../constants/constants';
+import Pager from '../common/Pager';
+
 
 class AuthorsPage extends React.Component {
   constructor(props, context) {
@@ -63,18 +65,13 @@ class AuthorsPage extends React.Component {
         <AuthorList
           authors={authors}
           onDelete={this.deleteAuthor}
-
         />
 
-        <button className="btn" type="button"
-                disabled={this.props.authors.previous ? '' : 'disabled'}
-                onClick={this.previousPage}
-        >Previous</button>
-        &nbsp; Page {this.props.authors.page} &nbsp;
-        <button className="btn" type="button"
-                disabled={this.props.authors.next ? '' : 'disabled'}
-                onClick={this.nextPage}
-        >Next</button>
+        <Pager
+          dataList={this.props.authors}
+          nextPage={this.nextPage}
+          previousPage={this.previousPage}
+        />
       </div>
     );
   }
