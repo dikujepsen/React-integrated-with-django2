@@ -15,7 +15,7 @@ class AuthorsPage extends React.Component {
     super(props, context);
 
     this.deleteAuthor = this.deleteAuthor.bind(this);
-    this.nextPage = this.nextPage.bind(this);
+    //this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
   }
 
@@ -23,7 +23,7 @@ class AuthorsPage extends React.Component {
     browserHistory.push('/authors/add');
   }
 
-  nextPage(event) {
+  nextPage = (event) =>  {
     event.preventDefault();
     this.props.actions.loadNextPage(this.props.authors);
   }

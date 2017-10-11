@@ -41,7 +41,7 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     //specify that we will be dealing with React code
-                    presets: ['react']
+                    presets: ['react', 'es2015',"stage-0"]
                 }
             },
             {test: /(\.css)$/, loaders: ['style-loader', 'css-loader']},

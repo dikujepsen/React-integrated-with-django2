@@ -5,7 +5,7 @@ const AuthorForm = ({author, onSave, onChange, saving, errors}) => {
     return (
       <form>
         <h1>
-          Manage Course
+          Manage Course <i className="glyphicon glyphicon-plus" />
         </h1>
         <TextInput
           name="firstName"
